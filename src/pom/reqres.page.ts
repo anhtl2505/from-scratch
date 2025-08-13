@@ -8,12 +8,29 @@ export class ApiReqresPage {
   constructor(private request: APIRequestContext) { }
 
   private async getAuthHeaders() {
-        const token = await AuthHelper.getAuthToken(this.request);
-        return {
-            'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json'
-        };
-    }
+    const token = await AuthHelper.getAuthToken(this.request);
+    return {
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    };
+  }
+
+  // POST - Login User
+  async loginUser(credentials: { email: string; password: string }) {
+    const response = await this.request.post(`${this.baseUrl}${API_ENDPOINTS.LOGIN}`, {
+      data: credentials,
+      headers: {
+        'x-api-key': API_ENDPOINTS.API_KEY
+      }
+    });
+
+    return {
+      status: response.status(),
+      data: response.status() === 200 ? await response.json() : await response.text(),
+      headers: response.headers()
+    };
+  }
+
 
   // GET - All users by page
   async getUsers(page: number) {
@@ -75,15 +92,15 @@ export class ApiReqresPage {
   async deleteUser(id: number) {
     const response = await this.request.delete(`${this.baseUrl}${API_ENDPOINTS.USER_BY_ID(id)}`, {
       headers: {
-        'Content-Type': 'application/json',   
+        'Content-Type': 'application/json',
         'x-api-key': '' + API_ENDPOINTS.API_KEY
       }
     });
-    
+
     return {
       status: response.status(),
       data: response.status() === 204 ? null : await response.text(),
-      
+
     };
   }
 
