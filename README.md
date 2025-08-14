@@ -3,15 +3,15 @@
 
 ```
 ├── src/
-│   ├── constants/             # Chứa các hằng số và cấu hình
+│   ├── constants/             # Data
 │   │   ├── baseConst.ts       # API endpoints, status codes
 │   │   └── testData.ts        # Test data
 │   │
-│   ├── data/                  # Dữ liệu test
-│   │   └── credentials.ts     # Thông tin đăng nhập
+│   ├── data/                  # Test Data
+│   │   └── credentials.ts     # Login credential
 │   │
 │   ├── fixtures/              # Test fixtures
-│   │   └── global-setup.ts    # Setup chung cho toàn bộ tests
+│   │   └── global-setup.ts    # Setup test
 │   │
 │   ├── pom/                   # Page Object Models
 │   │   └── reqres.page.ts     # API requests/methods
