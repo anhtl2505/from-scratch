@@ -32,7 +32,7 @@
 ```
 # Run test
 
-## Chạy E2E tests
+## Run E2E tests
  npx playwright test --grep "@E2E"
 
 ## Test environment
