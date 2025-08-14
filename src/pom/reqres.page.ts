@@ -11,7 +11,9 @@ export class ApiReqresPage {
     const token = await AuthHelper.getAuthToken(this.request);
     return {
       'Authorization': `Bearer ${token}`,
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      'x-api-key': '' + API_ENDPOINTS.API_KEY
+
     };
   }
 
@@ -20,7 +22,7 @@ export class ApiReqresPage {
     const response = await this.request.post(`${this.baseUrl}${API_ENDPOINTS.LOGIN}`, {
       data: credentials,
       headers: {
-        'x-api-key': API_ENDPOINTS.API_KEY
+        'x-api-key': '' + API_ENDPOINTS.API_KEY,
       }
     });
 
@@ -36,10 +38,10 @@ export class ApiReqresPage {
   async getUsers(page: number) {
     const response = await this.request.get(`${this.baseUrl}${API_ENDPOINTS.USERS}?page=${page}`);
     return {
-      status: response.status(),
-      data: await response.json(),
+      status: await response.status(),
+      data: await response.status() === 200 ? await response.json() : await response.text(),
       headers: {
-        'x-api-key': '' + API_ENDPOINTS.API_KEY
+        'x-api-key': '' + API_ENDPOINTS.API_KEY,
       }
     };
   }
@@ -48,12 +50,10 @@ export class ApiReqresPage {
   async getUserById(id: number) {
     const response = await this.request.get(`${this.baseUrl}${API_ENDPOINTS.USER_BY_ID(id)}`);
     return {
-      status: response.status(),
-      data: response.status() === 200 ? await response.json() : await response.text(),
+      status: await response.status(),
+      data: await response.status() === 200 ? await response.json() : await response.text(),
       headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-        'x-api-key': '' + API_ENDPOINTS.API_KEY
+        'x-api-key': '' + API_ENDPOINTS.API_KEY,
       }
     };
   }
@@ -63,12 +63,11 @@ export class ApiReqresPage {
     const response = await this.request.post(`${this.baseUrl}${API_ENDPOINTS.USERS}`, {
       data: userData,
       headers: {
-        'Content-Type': 'application/json',
-        'x-api-key': '' + API_ENDPOINTS.API_KEY
+        'x-api-key': '' + API_ENDPOINTS.API_KEY,
       }
     });
     return {
-      status: response.status(),
+      status: await response.status(),
       data: await response.json()
     };
   }
@@ -78,12 +77,11 @@ export class ApiReqresPage {
     const response = await this.request.put(`${this.baseUrl}${API_ENDPOINTS.USER_BY_ID(id)}`, {
       data: userData,
       headers: {
-        'Content-Type': 'application/json',
-        'x-api-key': '' + API_ENDPOINTS.API_KEY
+        'x-api-key': '' + API_ENDPOINTS.API_KEY,
       }
     });
     return {
-      status: response.status(),
+      status: await response.status(),
       data: await response.json()
     };
   }
@@ -92,14 +90,13 @@ export class ApiReqresPage {
   async deleteUser(id: number) {
     const response = await this.request.delete(`${this.baseUrl}${API_ENDPOINTS.USER_BY_ID(id)}`, {
       headers: {
-        'Content-Type': 'application/json',
-        'x-api-key': '' + API_ENDPOINTS.API_KEY
+        'x-api-key': '' + API_ENDPOINTS.API_KEY,
       }
     });
 
     return {
-      status: response.status(),
-      data: response.status() === 204 ? null : await response.text(),
+      status: await response.status(),
+      data: await response.status() === 204 ? null : await response.text(),
 
     };
   }
@@ -109,13 +106,12 @@ export class ApiReqresPage {
     const response = await this.request.post(`${this.baseUrl}${API_ENDPOINTS.LOGIN}`, {
       data: credentials,
       headers: {
-        'Content-Type': 'application/json',
-        'x-api-key': '' + API_ENDPOINTS.API_KEY
+        'x-api-key': '' + API_ENDPOINTS.API_KEY,
       }
     });
     return {
-      status: response.status(),
-      data: response.status() === 200 ? await response.json() : await response.text()
+      status: await response.status(),
+      data: await response.status() === 200 ? await response.json() : await response.text()
     };
   }
 }

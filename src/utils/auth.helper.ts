@@ -3,17 +3,16 @@ import { API_ENDPOINTS } from '../constants/baseConst';
 import { USER_PROVIDED_CREDENTIALS } from '../data/credential';
 
 export class AuthHelper {
-    // Biến static để lưu token xuyên suốt quá trình test
+    // Static variable for storing the authentication token
     private static authToken: string;
 
-    // Method để lấy token
+    // Method get authentication token
     static async getAuthToken(request: APIRequestContext): Promise<string> {
-        // Nếu đã có token, trả về luôn
         if (this.authToken) {
             return this.authToken;
         }
 
-        // Nếu chưa có token, thực hiện login
+        // If the token is not set, perform a login request
         const response = await request.post(
             `${API_ENDPOINTS.BASE_URL}${API_ENDPOINTS.LOGIN}`,
             {

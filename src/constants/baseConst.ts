@@ -15,7 +15,7 @@ export const HTTP_STATUS = {
 };
 
 export const DATA = {
-  PAGE_NUMBER: 1,
+  PAGE_NUMBER: 3,
   TOTAL_PAGES: 2,
   TOTAL_USERS: 12,
   USERS_PER_PAGE: 6,

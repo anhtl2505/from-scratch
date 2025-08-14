@@ -24,11 +24,8 @@ export const setupTest = () => {
 
 // export const setupTest = () => {
 //     let apiClient: ApiReqresPage;
-
 //     test.beforeAll(async ({ authenticatedRequest }) => {
-//         // Setup chỉ chạy một lần
 //         apiClient = new ApiReqresPage(authenticatedRequest);
 //     });
-
 //     return { apiClient };
 // };

@@ -41,5 +41,6 @@
 ## Stage environment
  set TEST_ENV=stage && npx playwright test
 
-
+## View report after run test 
+ npx playwright show-report
 
